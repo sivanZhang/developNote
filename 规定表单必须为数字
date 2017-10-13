@@ -1,0 +1,3 @@
+$('.carlist').on("keyup", '.carnum', function() {
+    this.value=this.value.replace(/\D/g,'')
+   });
