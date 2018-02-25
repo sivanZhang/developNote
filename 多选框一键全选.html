@@ -1,0 +1,28 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    1.
+    <input class="checked" type="checkbox" /> 2.
+    <input class="checked" type="checkbox" /> 3.
+    <input class="checked" type="checkbox" />
+    <div>全选或者全部取消:
+        <input type="checkbox" id="all_checked" />
+    </div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">
+    //jQuery CDN
+</script>
+<script>
+    $("#all_checked").click(function () {
+        if (this.checked) {
+            $("input.checked").prop("checked", true);
+        } else {
+            $("input.checked").prop("checked", false);
+        }
+    });
+</script>
+
+</html>

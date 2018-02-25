@@ -1,0 +1,20 @@
+<html>
+
+<head></head>
+
+<body>
+    <input id="number" type="text">
+    <div>禁止输入除1-9数字之外的其他字符和0</div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">
+    //jQuery CDN
+</script>
+<script>
+    $("#number").keyup(function () {  //当键盘按键被松开时事件
+        $(this).val($(this).val().replace(/[^1-9.]/g, ''));
+    }).bind("paste", function () {  //paste粘贴事件处理    
+        $(this).val($(this).val().replace(/[^1-9.]/g, ''));
+    }).css("ime-mode", "disabled"); //CSS设置输入不可用
+</script>
+
+</html>
