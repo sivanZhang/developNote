@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <style>
+        /*--相关的单选复选按钮--*/
+
+        /* @keyframes hover-color {  
+    from {  
+      border-color: #c0c0c0; }  
+    to {  
+      border-color: #ea5014; } }   */
+
+        .magic-radio,
+        .magic-checkbox {
+            position: absolute;
+            display: none;
+        }
+
+        .magic-radio[disabled],
+        .magic-checkbox[disabled] {
+            cursor: not-allowed;
+        }
+
+        .magic-radio+label,
+        .magic-checkbox+label {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+            vertical-align: text-top;
+        }
+
+        /*  .magic-radio + label:hover:before,  
+        .magic-checkbox + label:hover:before {  
+          animation-duration: 0.4s;  
+          animation-fill-mode: both;  
+          animation-name: hover-color; }   */
+
+        .magic-radio+label:before,
+        .magic-checkbox+label:before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            content: '';
+            background: rgb(210, 215, 217);
+            border: 1px solid rgb(210, 215, 217);
+        }
+
+        .magic-radio+label:after,
+        .magic-checkbox+label:after {
+            position: absolute;
+            display: none;
+            content: '';
+        }
+
+        .magic-radio[disabled]+label,
+        .magic-checkbox[disabled]+label {
+            cursor: not-allowed;
+            color: #e4e4e4;
+        }
+
+        .magic-radio[disabled]+label:hover,
+        .magic-radio[disabled]+label:before,
+        .magic-radio[disabled]+label:after,
+        .magic-checkbox[disabled]+label:hover,
+        .magic-checkbox[disabled]+label:before,
+        .magic-checkbox[disabled]+label:after {
+            cursor: not-allowed;
+        }
+
+        .magic-radio[disabled]+label:hover:before,
+        .magic-checkbox[disabled]+label:hover:before {
+            border: 1px solid #e4e4e4;
+            animation-name: none;
+        }
+
+        .magic-radio[disabled]+label:before,
+        .magic-checkbox[disabled]+label:before {
+            border-color: #e4e4e4;
+        }
+
+        .magic-radio:checked+label:before,
+        .magic-checkbox:checked+label:before {
+            animation-name: none;
+        }
+
+        .magic-radio:checked+label:after,
+        .magic-checkbox:checked+label:after {
+            display: block;
+        }
+
+        .magic-radio+label:before {
+            border-radius: 50%;
+        }
+
+        .magic-radio+label:after {
+            top: 7px;
+            left: 7px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ea5014;
+        }
+
+        .magic-radio:checked+label:before {
+            border: 1px solid #ea5014;
+        }
+
+        .magic-radio:checked[disabled]+label:before {
+            border: 1px solid #e6bdad;
+        }
+
+        .magic-radio:checked[disabled]+label:after {
+            background: #e6bdad;
+        }
+
+        .magic-checkbox+label:before {
+            border-radius: 3px;
+        }
+
+        .magic-checkbox+label:after {
+            top: 1.5px;
+            left: 4.5px;
+            box-sizing: border-box;
+            width: 5px;
+            height: 9px;
+            transform: rotate(45deg);
+            border-width: 2px;
+            border-style: solid;
+            border-color: #fff;
+            border-top: 0;
+            border-left: 0;
+        }
+
+        .magic-checkbox:checked+label:before {
+            border: #ea5014;
+            background: #ea5014;
+        }
+
+        .magic-checkbox:checked[disabled]+label:before {
+            border: #e6bdad;
+            background: #e6bdad;
+        }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <input type="checkbox" class="magic-checkbox">
+    <label></label>
+    <br><br>
+    <input type="checkbox" class="magic-checkbox">
+    <label></label>
+
+    <script>
+        $(function () {
+            /* 
+              让复选框CSS插件生效
+              */
+            $('.magic-checkbox').each(function () {
+                var i = $('.magic-checkbox').index($(this));
+                $('.magic-checkbox').eq(i).attr('id', 'c' + i);
+                $('.magic-checkbox + label').eq(i).attr('for', 'c' + i);
+            });
+        })</script>
+</body>
+
+</html>
