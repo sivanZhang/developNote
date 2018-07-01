@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <style>
+        /* 弹出框样式 */
+
+        .pop_up {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 30px;
+            min-width: 300px;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            display: none;
+            z-index: 10000;
+        }
+
+        .pop_up img {
+            height: 18px;
+            vertical-align: sub;
+        }
+
+        .pop_up button {
+            margin-right: 15px;
+        }
+
+        .pop_up>div {
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            resize: none;
+            border: 1px solid #ddd;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ea5014;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pop_up">
+        <div class="fs16 gray">
+            <img src="/static/img/right.gif" alt="">
+            <span id="pop-up-msg">已添加至购物车 </span>
+        </div>
+        <button id="continue" class="grey-btn common-btn">继续购买</button>
+        <a class="common-btn orange-bg" href="/shopcar/shopcars/">
+            <span class="white">现在结算</span>
+        </a>
+    </div>
+
+    <script>
+        /* 弹出框 */
+        $('#continue').click(function () {//点击灰色按钮关闭弹窗
+            $('.pop_up').hide();
+        })
+        function pop_upMsg(msg) {//显示弹出框，写入信息
+            $('.pop_up').show();
+            $('#pop-up-msg').text(msg);
+        }</script>
+</body>
+
+</html>
