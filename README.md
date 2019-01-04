@@ -1,5 +1,27 @@
 ## 关于移动端适配
->简洁实用的JS代码，打开demo网页可以直接运行查看效果！
+>仿照设计图实现移动端多种屏幕尺寸适配！
 ```dash
-wwww
+
+
+
+
+
+
+
+
+
+
+
+
+
+<code><script>
+    ! function(e, t) { var n = t.documentElement,
+        d = e.devicePixelRatio || 1;
+
+      function i() { var e = n.clientWidth / 3.75;
+        n.style.fontSize = e + "px" } if (function e() { t.body ? t.body.style.fontSize = "16px" : t.addEventListener("DOMContentLoaded", e) }(), i(), e.addEventListener("resize", i), e.addEventListener("pageshow", function(e) { e.persisted && i() }), 2 <= d) { var o = t.createElement("body"),
+          a = t.createElement("div");
+        a.style.border = ".5px solid transparent", o.appendChild(a), n.appendChild(o), 1 === a.offsetHeight && n.classList.add("hairlines"), n.removeChild(o) } }(window, document)
+  </script>
+</code>
 ```
