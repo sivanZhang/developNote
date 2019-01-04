@@ -1,9 +1,9 @@
 ## 关于移动端适配
 >仿照设计图实现移动端多种屏幕尺寸适配！
 ```dash
-1.图宽/基准尺寸(自己定相当于设计图的fontsize，100px,75px常见)= body宽的rem()；
-2.屏宽/body宽的rem()=实际的fontsize（用后面的JS实现）;
-3.图元素/设计图fontsize = 我们要的rem（百分比换算推演）；
+1.设计图宽÷基准尺寸(自由设置，相当于设计图的fontsize，常见有100px、75px)= body宽的rem（一个比例）；
+2.实际屏宽÷body宽的rem=实际的fontsize（按上面的比例逆向推算出实际fontsize，用后面的JS实现，不必关注）;
+3.设计图元素/设计图fontsize = 我们要的rem（按照rem的定义）；
 
 例如：
 设计图中基准尺寸是100px
