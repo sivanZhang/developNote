@@ -14,7 +14,7 @@
         $(this).val($(this).val().replace(/[^1-9.]/g, ''));
     }).bind("paste", function () {  //paste粘贴事件处理    
         $(this).val($(this).val().replace(/[^1-9.]/g, ''));
-    }).css("ime-mode", "disabled"); //CSS设置输入不可用
+    }).css("ime-mode", "disabled"); //CSS设置输入不可用(浏览器支持太少)
 </script>
 
 </html>
