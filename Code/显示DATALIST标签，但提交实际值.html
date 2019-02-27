@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <meta charset="utf-8">
+  <title>Bootstrap 实例 - 输入框组的下拉菜单按钮</title>
+</head>
+
+<body>
+  <input list="suggestionList" id="answerInput"> <datalist id="suggestionList">
+    <option data-value="42">Theanswer</option>
+    <option data-value="333">Testawwwwwwasder</option>
+  </datalist> <input type="hidden" name="answer" id="answerInput-hidden">
+</body>
+<script type="text/javascript">
+  document.getElementById("answerInput").addEventListener('input', function(e) {
+    var input = e.target,
+      list = input.getAttribute('list'),
+      options = document.querySelectorAll('#' + list + ' option'),
+      hiddenInput = document.getElementById(input.id + '-hidden'),
+      inputValue = input.value;
+    hiddenInput.value = inputValue;
+    for (var i = 0; i < options.length; i++) { var option = options[i]; if (option.innerText === inputValue) { hiddenInput.value = option.getAttribute('data-value'); break; } }
+    console.log(hiddenInput.value)
+  });
+</script>
+
+</html>
