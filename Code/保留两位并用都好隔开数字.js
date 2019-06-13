@@ -1,0 +1,1 @@
+(Number).toLocaleString(undefined, { maximumFractionDigits: 2 })

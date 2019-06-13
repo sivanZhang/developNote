@@ -1,8 +1,7 @@
-import XLSX from "xlsx";
-export default class financialDitail extends AbpBase {
-    @Prop(Number) companyId!: number; //平台ID
-    @Prop(String) companyName!: string; //平台名字
-    @Prop(Array) billingData!: Array<any>; //计费
+//import XLSX from "xlsx";
+export default class {
+
+    //inputNumber 的:max计算  来限制所有inputNumber之和不能超过100
     test(SLlist, cPercent) {
         let maxVal = 100;
         for (let item of SLlist) {
@@ -16,8 +15,6 @@ export default class financialDitail extends AbpBase {
     isReady: boolean = false;
     value11: any = 0;
     businessLine: boolean = false;
-    isShow: boolean = true;
-    isEdit: boolean = true;
     isSubmit: boolean = false;
     changedData: any = {};
     originalData: any = {};
@@ -27,11 +24,7 @@ export default class financialDitail extends AbpBase {
     excelArr: any[] = [];
     allArr: any[] = [];
     Json: any[] = [];
-    //修改成本分配
-    //包含数字的数组求和
-    _summation(arr) {
-        return arr.reduce((acc, cur) => acc + cur);
-    }
+
     //ajax请求已选时间节点的年度汇总并且导出为excel
     getTotalData() {
         this.$store
@@ -97,9 +90,7 @@ export default class financialDitail extends AbpBase {
     }
     //转换excel
     _transformExcel() {
-        const filename = `${
-            this.companyName
-            }${this.selectDate.getFullYear()}年成本汇总.xlsx`;
+        const filename = `年成本汇总.xlsx`;
         const ws_name = "SheetJS";
         const worksheet = XLSX.utils.aoa_to_sheet(this.excelArr);
         const workbook = XLSX.utils.book_new();
@@ -119,87 +110,15 @@ export default class financialDitail extends AbpBase {
             this.excelArr = [];
         }, 500);
     }
-    //页面接口数据转换为多维数组
-    _changeDataStructure() {
-        this.changedData.costAmount = Number(this.changedData.costAmount);
-        if (this.changedData.details) {
-            this.changedData.details.forEach(element => {
-                element.amount = Number(element.amount);
-            });
-            let index1Arr = this.changedData.details.filter(
-                t => t.billingItemParentCode == null
-            );
-            this.changedData["list"] = [...index1Arr];
-            this.changedData["list"].forEach((Pitem, Pindex) => {
-                let index2Arr = this.changedData.details.filter(
-                    t => t.billingItemParentCode == Pitem.billingItemCode
-                );
-                Pitem["list"] = [...index2Arr];
-                if (Pitem["list"].length > 0) {
-                    Pitem["list"].forEach(Citem => {
-                        let index3Arr = this.changedData.details.filter(
-                            t => t.billingItemParentCode == Citem.billingItemCode
-                        );
-                        Citem["list"] = [...index3Arr];
-                    });
-                }
-            });
-            delete this.changedData.details;
+
+
+    //百分比求和ffff
+    sumSLUpdating(Parent: any) {
+        let total: number = 0;
+        for (let item of Parent.SLlist) {
+            total += item.costPercent;
         }
-    }
-    //给包含对象的数组排序
-    _compare(property) {
-        return function (obj1, obj2) {
-            let value1 = obj1[property];
-            let value2 = obj2[property];
-            return value1 - value2;
-        };
-    }
-    //父组件懒调用 相当于create
-    simulationCreated(flag) {
-        //默认加载时间为一年前
-        let now: any = new Date();
-        now.setMonth(now.getMonth() - 1);
-        this.selectDate = now;
-        this.getData();
-        this.$store
-            .dispatch({
-                type: "run/GET_each_Total",
-                params: {
-                    issueYear: this.selectDate.getFullYear(),
-                    ids: this.companyId
-                }
-            })
-            .then(res => {
-                if (res.data.result) {
-                    let allArr = [...res.data.result].sort(this._compare("itemId"));
-                    let excelTdArr: any[] = [];
-                    let index1Arr = allArr.filter(t => t.billingItemParentCode == null);
-                    let sumArr: Array<number> = [0];
-                    index1Arr.forEach(element => {
-                        let index2Arr = allArr.filter(
-                            t => t.billingItemParentCode == element.billingItemCode
-                        );
-                        if (index2Arr.length > 0) {
-                            index2Arr.forEach(Pitem => {
-                                let index3Arr = allArr.filter(
-                                    t => t.billingItemParentCode == Pitem.billingItemCode
-                                );
-                                if (index3Arr.length > 0) {
-                                    index3Arr.forEach(Citem => {
-                                        excelTdArr.push(Citem.amount);
-                                    });
-                                }
-                                excelTdArr.push(Pitem.amount);
-                            });
-                        }
-                        excelTdArr.push(element.amount);
-                        sumArr.push(element.amount);
-                    });
-                    excelTdArr.push(this._summation(sumArr));
-                    excelTdArr.unshift("汇总");
-                    this.allArr = [...excelTdArr];
-                }
-            });
+        Parent["SLsum"] = total;
+        this.serviceLineList = [...this.serviceLineList];
     }
 }
