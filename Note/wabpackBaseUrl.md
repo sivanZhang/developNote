@@ -20,17 +20,5 @@
 
 ## config.js
 
-`{assetsDir: "static",
-    devServer:{
-        proxy: {
-      [process.env.VUE_APP_BASE_API]: {
-        target: 'http://192.168.1.10:8090',
-        changeOrigin: true,
-        pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      },
-    }
-    }
-
+`{assetsDir: "static"
 }`
